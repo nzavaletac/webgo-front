@@ -9,11 +9,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const items = [
-  // {
-  //   src: require("../../assets/images/logo.png"),
-  //   altText: "",
-  //   caption: "",
-  // },
   {
     src: "https://cdn.joinnus.com/files/2022/01/drquhEGIghYW6LQ.jpg",
     altText: "",
