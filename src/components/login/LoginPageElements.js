@@ -17,10 +17,7 @@ export const Image = styled.img`
 
 export const Div = styled.section`
     display: flex;
-    /* align-items: flex-start; */
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-content: space-around; */
 `
 
 export const Title = styled.h1`

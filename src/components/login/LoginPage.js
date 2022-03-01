@@ -23,8 +23,7 @@ export const LoginPage = () => {
                         <Text>Usuario</Text>
                         <Input placeholder='Ingrese Usuario'></Input>
                         <Text>Contraseña</Text>
-                        <Input placeholder='Ingrese Contraseña'></Input>
-                        {/* <input type="submit" value="Submit"></input> */}
+                        <Input placeholder='Ingrese Contraseña'></Input>                        
                         <Button onClick={() => console.log("hey!")}>LOG IN</Button>
 
                         <Forget>¿Olvidaste la Contraseña?</Forget>
