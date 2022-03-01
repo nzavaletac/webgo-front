@@ -61,3 +61,13 @@ export const Forget = styled.p`
     color: #009FC7;
     margin: 24px 56px;
 `
+export const CenterCarousel = styled.div`
+    display:flex;
+    align-items: center;
+    width: 100%;  
+    height: 100vh; 
+    img {
+        width: 100%;  
+        height: 100vh; 
+    }
+`

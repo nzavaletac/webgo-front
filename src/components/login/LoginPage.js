@@ -1,5 +1,5 @@
 import React from 'react'
-import { DivRow, DivColumn, Image, Div, Title, Text, Input, Button, Forget } from './LoginPageElements'
+import { CenterCarousel, DivRow, DivColumn, Image, Div, Title, Text, Input, Button, Forget } from './LoginPageElements'
 import MIR from "../../assets/images/MakeItReal.svg"
 import CarouselImg from '../carousel/Carousel'
 import "./login.css"
@@ -31,7 +31,9 @@ export const LoginPage = () => {
                 </Div>
             </DivColumn>
             <DivColumn >
-                <CarouselImg/>
+                <CenterCarousel>
+                    <CarouselImg />
+                </CenterCarousel>
             </DivColumn>
         </DivRow>
     </>
