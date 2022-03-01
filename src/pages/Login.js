@@ -7,6 +7,5 @@ export const Login = () => {
       <>
         <LoginPage/>
       </>
-    // <div>Login</div>
   )
 }
