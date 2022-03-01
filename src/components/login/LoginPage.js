@@ -2,8 +2,6 @@ import React from 'react'
 import { CenterCarousel, DivRow, DivColumn, Image, Div, Title, Text, Input, Button, Forget } from './LoginPageElements'
 import MIR from "../../assets/images/MakeItReal.svg"
 import CarouselImg from '../carousel/Carousel'
-import "./login.css"
-
 
 const clickHandler = (e) => {
     e.preventDefault();
