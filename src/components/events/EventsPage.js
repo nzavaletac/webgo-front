@@ -9,10 +9,22 @@ import {
   TextCreate,
   DivCreate,
   CreateAdd,
+  Selec,
+  OptionSelec,
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
 
 class Events extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedId: 0,
+    }
+  }
+
+  dropdownChanged(e) {
+    this.setState({ selectedId: e.target.value })
+  }
   Clickbutton() {
     console.log("Click")
   }
@@ -26,9 +38,24 @@ class Events extends React.Component {
             <Filter type="button" onClick={this.Clickbutton}>
               Filtro
             </Filter>
-            <Sort type="button" onClick={this.Clickbutton}>
-              Ordenar
-            </Sort>
+
+            <Selec
+              value={this.selectedId}
+              onChange={this.dropdownChanged.bind(this)}
+            >
+              <OptionSelec value="" disabled selected hidden>
+                Ordenar
+              </OptionSelec>
+              <OptionSelec key={1} value={1}>
+                Mas proximo
+              </OptionSelec>
+              <OptionSelec key={2} value={2}>
+                A-Z
+              </OptionSelec>
+              <OptionSelec key={3} value={3}>
+                Z-A
+              </OptionSelec>
+            </Selec>
           </DivButtons>
           <DivEvents>
             <CardEvent src={Carousel_1} alt="ImgCardEven1" id={1}></CardEvent>

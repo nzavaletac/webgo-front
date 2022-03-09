@@ -4,7 +4,6 @@ import filterSvg from "../../assets/images/filter.svg"
 import createSvg from "../../assets/images/create.svg"
 
 export const Filter = styled.button`
-  background-color: #dcd9d9;
   justify-content: center;
   position: absolute;
   width: 140px;
@@ -14,10 +13,12 @@ export const Filter = styled.button`
   background-image: url(${filterSvg});
   background-repeat: no-repeat;
   background-position: 107px 7px;
-  border-color: #d0d0d0;
+  background-color: #fff;
+  color: #00b6f0;
+  border: 2px solid #00b6f0;
 `
+/*
 export const Sort = styled.button`
-  background-color: #dcd9d9;
   display: flex;
   justify-content: center;
   background-image: url(${sortSvg});
@@ -26,22 +27,24 @@ export const Sort = styled.button`
   position: absolute;
   width: 140px;
   height: 35px;
-  left: 206px;
+  left: 366px;
   top: 102px;
-  border-color: #d0d0d0;
-`
+  background-color: #fff;
+  color: #00b6f0;
+  border: 2px solid #00b6f0;
+`*/
 export const Container = styled.div`
-  background-color: #5c5c5c;
+  background-color: #ffffff;
   height: auto;
   padding: 1vw;
 `
 export const DivButtons = styled.div`
-  background-color: #5c5c5c;
+  background-color: #ffffff;
   height: 60px;
 `
 
 export const DivEvents = styled.div`
-  background-color: #5c5c5c;
+  background-color: #ffffff;
   height: auto;
   display: flex;
   flex: 1 0 auto;
@@ -58,13 +61,17 @@ export const DivCreate = styled.div`
   align-items: center;
 `
 export const Create = styled.button`
-  color: #5c5c5c;
   width: 141px;
   height: 37px;
-  background: #ffffff;
   border-radius: 15px;
   border-style: none;
   margin-right: 5px;
+
+  background-color: #fff;
+  color: #00b6f0;
+  border: 2px solid #00b6f0;
+  display: flex;
+  align-items: center;
 `
 export const TextCreate = styled.p`
   width: 134px;
@@ -78,7 +85,7 @@ export const TextCreate = styled.p`
   letter-spacing: 0.2px;
   color: #000000;
   text-align: center;
-  margin-top: 7px;
+  margin-top: 10px;
 `
 export const CreateAdd = styled.button`
   width: 55px;
@@ -89,3 +96,28 @@ export const CreateAdd = styled.button`
   background-repeat: no-repeat;
   background-position: 0 7px;
 `
+export const Selec = styled.select`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 140px;
+  height: 35px;
+  left: 206px;
+  top: 102px;
+  text-align: center;
+  background-color: #fff;
+  color: #00b6f0;
+  border: 2px solid #00b6f0;
+  background-image: url(${sortSvg});
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-position: 107px 7px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  ::-ms-expand {
+    display: none; /*Evita que se muestre la flecha por defecto en versiones de IE*/
+  }
+`
+export const OptionSelec = styled.option``
