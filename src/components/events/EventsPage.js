@@ -3,7 +3,6 @@ import {
   Container,
   DivButtons,
   Filter,
-  Sort,
   DivEvents,
   Create,
   TextCreate,
