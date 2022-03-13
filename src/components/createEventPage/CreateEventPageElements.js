@@ -17,10 +17,7 @@ export const Image = styled.img`
   width: 200px;
 `
 
-export const ContainerForm = styled.div`
-  /*display: flex;
-  flex-direction: column;*/
-`
+export const ContainerForm = styled.div``
 
 export const Title = styled.h1`
   color: #009fc7;
