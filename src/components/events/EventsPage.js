@@ -8,8 +8,8 @@ import {
   TextCreate,
   DivCreate,
   CreateAdd,
-  Selec,
-  OptionSelec,
+  Select,
+  OptionSelect,
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
 
@@ -38,23 +38,23 @@ class Events extends React.Component {
               Filtro
             </Filter>
 
-            <Selec
+            <Select
               value={this.selectedId}
               onChange={this.dropdownChanged.bind(this)}
             >
-              <OptionSelec value="" disabled selected hidden>
+              <OptionSelect value="" disabled selected hidden>
                 Ordenar
-              </OptionSelec>
-              <OptionSelec key={1} value={1}>
+              </OptionSelect>
+              <OptionSelect key={1} value={1}>
                 Mas proximo
-              </OptionSelec>
-              <OptionSelec key={2} value={2}>
+              </OptionSelect>
+              <OptionSelect key={2} value={2}>
                 A-Z
-              </OptionSelec>
-              <OptionSelec key={3} value={3}>
+              </OptionSelect>
+              <OptionSelect key={3} value={3}>
                 Z-A
-              </OptionSelec>
-            </Selec>
+              </OptionSelect>
+            </Select>
           </DivButtons>
           <DivEvents>
             <CardEvent src={Carousel_1} alt="ImgCardEven1" id={1}></CardEvent>
