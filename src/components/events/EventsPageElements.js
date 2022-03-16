@@ -17,22 +17,7 @@ export const Filter = styled.button`
   color: #00b6f0;
   border: 2px solid #00b6f0;
 `
-/*
-export const Sort = styled.button`
-  display: flex;
-  justify-content: center;
-  background-image: url(${sortSvg});
-  background-repeat: no-repeat;
-  background-position: 107px 7px;
-  position: absolute;
-  width: 140px;
-  height: 35px;
-  left: 366px;
-  top: 102px;
-  background-color: #fff;
-  color: #00b6f0;
-  border: 2px solid #00b6f0;
-`*/
+
 export const Container = styled.div`
   background-color: #ffffff;
   height: auto;
@@ -96,7 +81,7 @@ export const CreateAdd = styled.button`
   background-repeat: no-repeat;
   background-position: 0 7px;
 `
-export const Selec = styled.select`
+export const Select = styled.select`
   display: flex;
   justify-content: center;
   position: absolute;
@@ -120,4 +105,4 @@ export const Selec = styled.select`
     display: none; /*Evita que se muestre la flecha por defecto en versiones de IE*/
   }
 `
-export const OptionSelec = styled.option``
+export const OptionSelect = styled.option``
