@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import { styled as MuiStyled } from "@mui/material/styles"
+import DateTimePicker from "@mui/lab/DateTimePicker"
 
 export const Container = styled.div`
   border: 1px solid #009fc7;
@@ -95,4 +97,13 @@ export const Upload = styled.div`
   width: 45vw;
   height: 35vh;
   border: 1px solid #009fc7;
+`
+export const DateTime = MuiStyled(DateTimePicker)`
+background-color:black;
+:focus {
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  border-bottom: 1px solid #009fc7;
+} 
 `
