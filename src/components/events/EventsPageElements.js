@@ -18,6 +18,7 @@ export const Filter = styled.button`
   color: #00b6f0;
   border: 2px solid #00b6f0;
 `
+
 export const Container = styled.div`
   background-color: #ffffff;
   height: auto;
@@ -62,6 +63,7 @@ export const Create = styled(Link)`
   :active {
     text-decoration: none;
   }
+
 `
 export const TextCreate = styled.p`
   width: 134px;
