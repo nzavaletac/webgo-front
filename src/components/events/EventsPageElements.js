@@ -2,6 +2,7 @@ import styled from "styled-components"
 import sortSvg from "../../assets/images/sort.svg"
 import filterSvg from "../../assets/images/filter.svg"
 import createSvg from "../../assets/images/create.svg"
+import { Link } from "react-router-dom"
 
 export const Filter = styled.button`
   justify-content: center;
@@ -44,7 +45,7 @@ export const DivCreate = styled.div`
   flex-direction: row;
   align-items: center;
 `
-export const Create = styled.button`
+export const Create = styled(Link)`
   width: 141px;
   height: 37px;
   border-radius: 15px;
@@ -56,6 +57,11 @@ export const Create = styled.button`
   border: 2px solid #00b6f0;
   display: flex;
   align-items: center;
+  :link,
+  :visited,
+  :active {
+    text-decoration: none;
+  }
 `
 export const TextCreate = styled.p`
   width: 134px;
@@ -71,7 +77,7 @@ export const TextCreate = styled.p`
   text-align: center;
   margin-top: 10px;
 `
-export const CreateAdd = styled.button`
+export const CreateAdd = styled(Link)`
   width: 55px;
   height: 65px;
   background-color: transparent;
