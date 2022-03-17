@@ -66,10 +66,10 @@ class Events extends React.Component {
             <CardEvent src={Carousel_1} alt="ImgCardEven6" id={7}></CardEvent>
           </DivEvents>
           <DivCreate>
-            <Create onClick={this.Clickbutton}>
+            <Create to="/create">
               <TextCreate>Create</TextCreate>
             </Create>
-            <CreateAdd onClick={this.Clickbutton}></CreateAdd>
+            <CreateAdd to="/create"></CreateAdd>
           </DivCreate>
         </Container>
       </div>
