@@ -11,6 +11,10 @@ export const Card = styled.div`
   border-radius: 10px;
   width: 260px;
   height: 375px;
+
+  background-color: #fff;
+  color: #00b6f0;
+  border: 2px solid #00b6f0;
 `
 export const Edit = styled.button`
   margin-left: 230px;
@@ -38,7 +42,6 @@ export const ImgEvent = styled.img`
 `
 export const Description = styled.p`
   position: static;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
@@ -48,6 +51,8 @@ export const Description = styled.p`
   color: #ffffff;
   margin: 0 5.05%;
   margin-bottom: 5px;
+
+  color: #000000;
 `
 export const Title = styled.h5`
   margin-left: 110px;

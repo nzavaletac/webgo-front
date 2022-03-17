@@ -3,16 +3,27 @@ import {
   Container,
   DivButtons,
   Filter,
-  Sort,
   DivEvents,
   Create,
   TextCreate,
   DivCreate,
   CreateAdd,
+  Select,
+  OptionSelect,
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
 
 class Events extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedId: 0,
+    }
+  }
+
+  dropdownChanged(e) {
+    this.setState({ selectedId: e.target.value })
+  }
   Clickbutton() {
     console.log("Click")
   }
@@ -26,9 +37,24 @@ class Events extends React.Component {
             <Filter type="button" onClick={this.Clickbutton}>
               Filtro
             </Filter>
-            <Sort type="button" onClick={this.Clickbutton}>
-              Ordenar
-            </Sort>
+
+            <Select
+              value={this.selectedId}
+              onChange={this.dropdownChanged.bind(this)}
+            >
+              <OptionSelect value="" disabled selected hidden>
+                Ordenar
+              </OptionSelect>
+              <OptionSelect key={1} value={1}>
+                Mas proximo
+              </OptionSelect>
+              <OptionSelect key={2} value={2}>
+                A-Z
+              </OptionSelect>
+              <OptionSelect key={3} value={3}>
+                Z-A
+              </OptionSelect>
+            </Select>
           </DivButtons>
           <DivEvents>
             <CardEvent src={Carousel_1} alt="ImgCardEven1" id={1}></CardEvent>
@@ -40,10 +66,10 @@ class Events extends React.Component {
             <CardEvent src={Carousel_1} alt="ImgCardEven6" id={7}></CardEvent>
           </DivEvents>
           <DivCreate>
-            <Create onClick={this.Clickbutton}>
+            <Create to="/create">
               <TextCreate>Create</TextCreate>
             </Create>
-            <CreateAdd onClick={this.Clickbutton}></CreateAdd>
+            <CreateAdd to="/create"></CreateAdd>
           </DivCreate>
         </Container>
       </div>
