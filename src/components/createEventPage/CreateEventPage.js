@@ -13,7 +13,10 @@ import {
   DivMap,
   Upload,
   DateTime,
+  Categories,
+  TextField2,
 } from "./CreateEventPageElements"
+import CatHelp from "../../helpers/Categories.js"
 import AdapterDateFns from "@mui/lab/AdapterDateFns"
 import LocalizationProvider from "@mui/lab/LocalizationProvider"
 import TextField from "@mui/material/TextField"
@@ -25,6 +28,7 @@ const CreateEventPage = () => {
   mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN
   const mapContainer = useRef(null)
   const map = useRef(null)
+  const [valueCat, setValueCat] = React.useState(CatHelp())
 
   useEffect(() => {
     if (map.current) return // initialize map only once
@@ -42,6 +46,20 @@ const CreateEventPage = () => {
           <Column>
             <Label>Title</Label>
             <Input type="text" placeholder="Enter events's title " />
+            <Label>Category</Label>
+            <Categories
+              multiple
+              limitTags={2}
+              options={valueCat}
+              getOptionLabel={(option) => option.title}
+              renderInput={(params) => (
+                <TextField2
+                  {...params}
+                  variant="standard"
+                  placeholder="Categories"
+                />
+              )}
+            />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Label>DateTime</Label>
               <DateTime
