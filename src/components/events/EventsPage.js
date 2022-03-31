@@ -13,6 +13,7 @@ import {
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
 import HelperEvents from "../../helpers/HelperEvents"
+import HelperSortEvents from "../../helpers/HelperSortEvents.js"
 
 class Events extends React.Component {
   constructor() {
@@ -24,16 +25,16 @@ class Events extends React.Component {
   }
 
   dropdownChanged(e) {
-    console.log("previo selectid", this.selectedId)
-    this.setState({ selectedId: e.target.value })
-    console.log("selectedId asignado", this.selectedId)
+    this.setState({
+      selectedId: e.target.value,
+      arrEvents: HelperSortEvents(e.target.value, this.state.arrEvents),
+    })
   }
   Clickbutton() {
     console.log("Click")
   }
 
   render() {
-    let Carousel_1 = "https://cdn.joinnus.com/files/2022/01/drquhEGIghYW6LQ.jpg"
     return (
       <div>
         <Container>
@@ -41,16 +42,15 @@ class Events extends React.Component {
             <Filter type="button" onClick={this.Clickbutton}>
               Filtro
             </Filter>
-
             <Select
               value={this.selectedId}
               onChange={this.dropdownChanged.bind(this)}
             >
-              <OptionSelect value="" disabled selected hidden>
+              <OptionSelect value={0} disabled selected hidden>
                 Ordenar
               </OptionSelect>
               <OptionSelect key={1} value={1}>
-                Mas proximo
+                Proximo
               </OptionSelect>
               <OptionSelect key={2} value={2}>
                 A-Z
