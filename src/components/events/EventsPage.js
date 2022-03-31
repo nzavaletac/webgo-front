@@ -12,12 +12,14 @@ import {
   OptionSelect,
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
+import HelperEvents from "../../helpers/HelperEvents"
 
 class Events extends React.Component {
   constructor() {
     super()
     this.state = {
       selectedId: 0,
+      arrEvents: HelperEvents(),
     }
   }
 
@@ -57,13 +59,17 @@ class Events extends React.Component {
             </Select>
           </DivButtons>
           <DivEvents>
-            <CardEvent src={Carousel_1} alt="ImgCardEven1" id={1}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven2" id={2}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven3" id={3}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven4" id={4}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven5" id={5}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven6" id={6}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven6" id={7}></CardEvent>
+            {this.state.arrEvents.map((event) => {
+              return (
+                <CardEvent
+                  src={event.src}
+                  alt={event.title}
+                  id={event.id}
+                  key={event.id}
+                  title={event.title}
+                ></CardEvent>
+              )
+            })}
           </DivEvents>
           <DivCreate>
             <Create to="/create">

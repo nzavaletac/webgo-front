@@ -48,24 +48,24 @@ export const Description = styled.p`
   font-size: 11px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #ffffff;
   margin: 0 5.05%;
   margin-bottom: 5px;
-
   color: #000000;
 `
 export const Title = styled.h5`
-  margin-left: 110px;
+  /*margin-left: 110px;
   margin-top: 0px;
   margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  text-align: center;*/
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
   line-height: 24px;
-  display: flex;
-  align-items: center;
-  text-align: center;
   letter-spacing: 0.2px;
-  color: #ffffff;
+  color: #000000;
+  margin: 0 auto;
+  text-align: center;
 `

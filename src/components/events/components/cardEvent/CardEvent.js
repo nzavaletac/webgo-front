@@ -18,7 +18,7 @@ function CardEvent(props) {
   return (
     <Card>
       <Edit onClick={() => EditEvent(props.id)}></Edit>
-      <Title>Event 1</Title>
+      <Title>{props.title}</Title>
       <ImgEvent src={props.src} alt={props.alt} />
       <Description>
         When you add work to your Slate calendar we automatically calculate
