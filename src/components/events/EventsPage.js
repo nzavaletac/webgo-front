@@ -46,7 +46,7 @@ class Events extends React.Component {
               value={this.selectedId}
               onChange={this.dropdownChanged.bind(this)}
             >
-              <OptionSelect value={0} disabled selected hidden>
+              <OptionSelect value={0} disabled hidden>
                 Ordenar
               </OptionSelect>
               <OptionSelect key={1} value={1}>
