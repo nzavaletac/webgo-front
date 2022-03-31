@@ -24,7 +24,9 @@ class Events extends React.Component {
   }
 
   dropdownChanged(e) {
+    console.log("previo selectid", this.selectedId)
     this.setState({ selectedId: e.target.value })
+    console.log("selectedId asignado", this.selectedId)
   }
   Clickbutton() {
     console.log("Click")
@@ -67,6 +69,7 @@ class Events extends React.Component {
                   id={event.id}
                   key={event.id}
                   title={event.title}
+                  date={event.date}
                 ></CardEvent>
               )
             })}

@@ -9,8 +9,8 @@ export const Card = styled.div`
   border: 1px solid #1e1e1e;
   box-sizing: border-box;
   border-radius: 10px;
-  width: 260px;
-  height: 375px;
+  width: 270px;
+  height: 390px;
 
   background-color: #fff;
   color: #00b6f0;
@@ -41,6 +41,18 @@ export const ImgEvent = styled.img`
   margin-top: 10px;
 `
 export const Description = styled.p`
+  position: static;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  margin: 0 5.05%;
+  margin-bottom: 5px;
+  color: #000000;
+`
+export const Date = styled.p`
   position: static;
   font-family: Roboto;
   font-style: normal;

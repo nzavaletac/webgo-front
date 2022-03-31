@@ -6,6 +6,7 @@ import {
   Description,
   Delete,
   ImgEvent,
+  Date,
 } from "./CardEventElement"
 import EditEvent from "../../../../helpers/EditEvent.js"
 import DeleteEvent from "../../../../helpers/DeleteEvent.js"
@@ -24,6 +25,7 @@ function CardEvent(props) {
         When you add work to your Slate calendar we automatically calculate
         useful insights about the financial health
       </Description>
+      <Date>{props.date.toLocaleDateString()}</Date>
       <Delete onClick={toggle}></Delete>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Delete Event</ModalHeader>
