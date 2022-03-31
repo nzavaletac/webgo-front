@@ -16,7 +16,7 @@ import {
   Categories,
   TextField2,
 } from "./CreateEventPageElements"
-import CatHelp from "../../helpers/Categories.js"
+import HelperCategories from "../../helpers/HelperCategories.js"
 import AdapterDateFns from "@mui/lab/AdapterDateFns"
 import LocalizationProvider from "@mui/lab/LocalizationProvider"
 import TextField from "@mui/material/TextField"
@@ -31,7 +31,7 @@ const CreateEventPage = () => {
   mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const [valueCat, setValueCat] = React.useState(CatHelp())
+  const [valueCat, setValueCat] = React.useState(HelperCategories())
 
   useEffect(() => {
     if (map.current) return // initialize map only once
