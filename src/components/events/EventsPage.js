@@ -70,6 +70,7 @@ class Events extends React.Component {
                   key={event.id}
                   title={event.title}
                   date={event.date}
+                  categories={event.categories}
                 ></CardEvent>
               )
             })}

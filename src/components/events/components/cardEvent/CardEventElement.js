@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import editSvg from "../../../../assets/images/edit.svg"
 import deleteSvg from "../../../../assets/images/delete.svg"
-
+import Chip from "@mui/material/Chip"
 export const Card = styled.div`
   background-color: #1e1e1e;
   margin: 1vh 1vw;
@@ -10,7 +10,7 @@ export const Card = styled.div`
   box-sizing: border-box;
   border-radius: 10px;
   width: 270px;
-  height: 390px;
+  height: 430px;
 
   background-color: #fff;
   color: #00b6f0;
@@ -51,6 +51,8 @@ export const Description = styled.p`
   margin: 0 5.05%;
   margin-bottom: 5px;
   color: #000000;
+  height: 48px;
+  width: 240px;
 `
 export const Date = styled.p`
   position: static;
@@ -80,4 +82,15 @@ export const Title = styled.h5`
   color: #000000;
   margin: 0 auto;
   text-align: center;
+`
+export const Tags = styled.div`
+  height: 45px;
+  width: 240px;
+  display: flex;
+  justify-content: center;
+  margin: 0 12px;
+  align-items: center;
+`
+export const Tag = styled(Chip)`
+  margin: 0 2px;
 `
