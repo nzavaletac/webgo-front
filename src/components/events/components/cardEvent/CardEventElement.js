@@ -67,12 +67,6 @@ export const Date = styled.p`
   color: #000000;
 `
 export const Title = styled.h5`
-  /*margin-left: 110px;
-  margin-top: 0px;
-  margin-bottom: 2px;
-  display: flex;
-  align-items: center;
-  text-align: center;*/
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
