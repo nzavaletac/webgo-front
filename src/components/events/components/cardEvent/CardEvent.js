@@ -30,7 +30,14 @@ function CardEvent(props) {
       <Date>{props.date.toLocaleDateString()}</Date>
       <Tags>
         {props.categories.map((category) => {
-          return <Tag size="small" color="info" label={category.title}></Tag>
+          return (
+            <Tag
+              size="small"
+              color="info"
+              key={category.id}
+              label={category.title}
+            ></Tag>
+          )
         })}
       </Tags>
       <Delete onClick={toggle}></Delete>
