@@ -6,14 +6,14 @@ import date from "../../../assets/images/date.svg"
 const Tags = () => {
   return (
     <Container>
-      <Icon to="/">
+      <Icon to="">
         <img src={categories} alt="categories" />
+        Categories
       </Icon>
-      <p>Categories</p>
-      <Icon to="/">
+      <Icon to="">
         <img src={date} alt="date" />
+        Date
       </Icon>
-      <p>Date</p>
     </Container>
   )
 }
