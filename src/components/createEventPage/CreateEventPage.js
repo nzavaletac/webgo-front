@@ -38,6 +38,23 @@ const CreateEventPage = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
+      center: [-77.03996453142095, -12.059900202814433],
+      zoom: 14,
+    })
+    map.current.addControl(new mapboxgl.NavigationControl())
+    map.current.addControl(new mapboxgl.FullscreenControl())
+    map.current.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      })
+    )
+    map.current.on("mousemove", function (e) {
+      document.getElementById("coordenadas").innerHTML = JSON.stringify(
+        e.lngLat
+      )
     })
   })
 
