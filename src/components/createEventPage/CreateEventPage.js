@@ -24,6 +24,8 @@ import "mapbox-gl/dist/mapbox-gl.css"
 import mapboxgl from "mapbox-gl/dist/mapbox-gl.js"
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker"
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
 
 const CreateEventPage = () => {
   const [valueDate, setValueDate] = React.useState(new Date())
@@ -32,6 +34,10 @@ const CreateEventPage = () => {
   const mapContainer = useRef(null)
   const map = useRef(null)
   const [valueCat, setValueCat] = React.useState(HelperCategories())
+  const geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+  })
 
   useEffect(() => {
     if (map.current) return // initialize map only once
