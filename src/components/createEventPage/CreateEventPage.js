@@ -34,12 +34,12 @@ const CreateEventPage = () => {
   const mapContainer = useRef(null)
   const map = useRef(null)
   const [valueCat, setValueCat] = React.useState(HelperCategories())
-  const geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl,
-  })
+  const [valueLngLat, setValueLngLat] = React.useState([
+    -77.03996453142095, -12.059900202814433,
+  ])
 
   useEffect(() => {
+    var marker
     if (map.current) return // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -47,6 +47,15 @@ const CreateEventPage = () => {
       center: [-77.03996453142095, -12.059900202814433],
       zoom: 14,
     })
+
+    map.current.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        zoom: 14,
+        marker: false,
+      })
+    )
     map.current.addControl(new mapboxgl.NavigationControl())
     map.current.addControl(new mapboxgl.FullscreenControl())
     map.current.addControl(
@@ -55,12 +64,20 @@ const CreateEventPage = () => {
           enableHighAccuracy: true,
         },
         trackUserLocation: true,
+        //showUserLocation:false,
       })
     )
-    map.current.on("mousemove", function (e) {
-      document.getElementById("coordenadas").innerHTML = JSON.stringify(
-        e.lngLat
-      )
+
+    map.current.on("click", function (e) {
+      setValueLngLat([
+        (valueLngLat[0] = Object.values(e.lngLat)[0]),
+        (valueLngLat[1] = Object.values(e.lngLat)[1]),
+      ])
+      if (marker == null) {
+        marker = new mapboxgl.Marker().setLngLat(valueLngLat).addTo(map.current)
+      } else {
+        marker.setLngLat(valueLngLat)
+      }
     })
   })
 
