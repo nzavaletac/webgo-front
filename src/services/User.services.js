@@ -1,11 +1,6 @@
 import axios from "axios";
 import { URL_BACKEND } from "../environments/environments";
 
-// export const getUsers = async () => {
-//   const result = await axios.get(`${URL_BACKEND}/users`);
-//   return result.data;
-// };
-
 export const postUsers = async (objUser) => {
   const result = await axios.post(
     `${URL_BACKEND}/users/signup`,
@@ -18,18 +13,6 @@ export const postUsers = async (objUser) => {
   );
   return result.data;
 };
-
-// export const postUsers = async (objUser) => {
-//   const peticion = await fetch(`${URL_BACKEND}/users/signup`, {
-//     method: "POST",
-//     body: JSON.stringify(objUser),
-//     headers: {
-//       "Content-type": "application/json",
-//     },
-//   });
-//   const data = await peticion.json();
-//   return data;
-// };
 
 export const putUsers = async (objUser) => {
   const response = await axios.put(
