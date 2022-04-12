@@ -33,11 +33,12 @@ export const DivEvents = styled.div`
   background-color: #ffffff;
   height: auto;
   display: flex;
+  justify-content: flex-start;
   flex: 1 0 auto;
   flex-wrap: wrap;
   width: 100%;
-  padding: 1vw;
-  justify-content: flex-start;
+  padding: 1vw 0;
+  padding-left: 10vw;
 `
 export const DivCreate = styled.div`
   display: flex;
@@ -63,7 +64,6 @@ export const Create = styled(Link)`
   :active {
     text-decoration: none;
   }
-
 `
 export const TextCreate = styled.p`
   width: 134px;

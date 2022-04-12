@@ -12,24 +12,29 @@ import {
   OptionSelect,
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
+import HelperEvents from "../../helpers/HelperEvents"
+import HelperSortEvents from "../../helpers/HelperSortEvents.js"
 
 class Events extends React.Component {
   constructor() {
     super()
     this.state = {
       selectedId: 0,
+      arrEvents: HelperEvents(),
     }
   }
 
   dropdownChanged(e) {
-    this.setState({ selectedId: e.target.value })
+    this.setState({
+      selectedId: e.target.value,
+      arrEvents: HelperSortEvents(e.target.value, this.state.arrEvents),
+    })
   }
   Clickbutton() {
     console.log("Click")
   }
 
   render() {
-    let Carousel_1 = "https://cdn.joinnus.com/files/2022/01/drquhEGIghYW6LQ.jpg"
     return (
       <div>
         <Container>
@@ -37,16 +42,15 @@ class Events extends React.Component {
             <Filter type="button" onClick={this.Clickbutton}>
               Filtro
             </Filter>
-
             <Select
               value={this.selectedId}
               onChange={this.dropdownChanged.bind(this)}
             >
-              <OptionSelect value="" disabled selected hidden>
+              <OptionSelect value={0} defaultValue hidden>
                 Ordenar
               </OptionSelect>
               <OptionSelect key={1} value={1}>
-                Mas proximo
+                Proximo
               </OptionSelect>
               <OptionSelect key={2} value={2}>
                 A-Z
@@ -57,13 +61,19 @@ class Events extends React.Component {
             </Select>
           </DivButtons>
           <DivEvents>
-            <CardEvent src={Carousel_1} alt="ImgCardEven1" id={1}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven2" id={2}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven3" id={3}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven4" id={4}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven5" id={5}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven6" id={6}></CardEvent>
-            <CardEvent src={Carousel_1} alt="ImgCardEven6" id={7}></CardEvent>
+            {this.state.arrEvents.map((event) => {
+              return (
+                <CardEvent
+                  src={event.src}
+                  alt={event.title}
+                  id={event.id}
+                  key={event.id}
+                  title={event.title}
+                  date={event.date}
+                  categories={event.categories}
+                ></CardEvent>
+              )
+            })}
           </DivEvents>
           <DivCreate>
             <Create to="/create">

@@ -6,6 +6,9 @@ import {
   Description,
   Delete,
   ImgEvent,
+  Date,
+  Tags,
+  Tag,
 } from "./CardEventElement"
 import EditEvent from "../../../../helpers/EditEvent.js"
 import DeleteEvent from "../../../../helpers/DeleteEvent.js"
@@ -18,12 +21,25 @@ function CardEvent(props) {
   return (
     <Card>
       <Edit onClick={() => EditEvent(props.id)}></Edit>
-      <Title>Event 1</Title>
+      <Title>{props.title}</Title>
       <ImgEvent src={props.src} alt={props.alt} />
       <Description>
         When you add work to your Slate calendar we automatically calculate
         useful insights about the financial health
       </Description>
+      <Date>{props.date.toLocaleDateString()}</Date>
+      <Tags>
+        {props.categories.map((category) => {
+          return (
+            <Tag
+              size="small"
+              color="info"
+              key={category.id}
+              label={category.title}
+            ></Tag>
+          )
+        })}
+      </Tags>
       <Delete onClick={toggle}></Delete>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Delete Event</ModalHeader>

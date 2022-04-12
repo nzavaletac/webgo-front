@@ -13,24 +13,25 @@ import {
   DivMap,
   Upload,
   DateTime,
+  Categories,
+  TextField2,
 } from "./CreateEventPageElements"
+import HelperCategories from "../../helpers/HelperCategories.js"
 import AdapterDateFns from "@mui/lab/AdapterDateFns"
 import LocalizationProvider from "@mui/lab/LocalizationProvider"
-import DatePicker from "@mui/lab/DatePicker"
 import TextField from "@mui/material/TextField"
-import TimePicker from "@mui/lab/TimePicker"
 import "mapbox-gl/dist/mapbox-gl.css"
-var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js")
+import mapboxgl from "mapbox-gl/dist/mapbox-gl.js"
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker"
 
 const CreateEventPage = () => {
   const [valueDate, setValueDate] = React.useState(new Date())
-  const [valueTime, setValueTime] = React.useState(
-    new Date("2018-01-01T00:00:00.000Z")
-  )
-  const [value, setValue] = React.useState(new Date())
+  mapboxgl.workerClass = MapboxWorker
   mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN
   const mapContainer = useRef(null)
   const map = useRef(null)
+  const [valueCat, setValueCat] = React.useState(HelperCategories())
 
   useEffect(() => {
     if (map.current) return // initialize map only once
@@ -48,36 +49,29 @@ const CreateEventPage = () => {
           <Column>
             <Label>Title</Label>
             <Input type="text" placeholder="Enter events's title " />
+            <Label>Category</Label>
+            <Categories
+              multiple
+              limitTags={2}
+              options={valueCat}
+              getOptionLabel={(option) => option.title}
+              renderInput={(params) => (
+                <TextField2
+                  {...params}
+                  variant="standard"
+                  placeholder="Categories"
+                />
+              )}
+            />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <Label>Date</Label>
-
-              <DatePicker
-                mask={"__/__/____"}
-                value={valueDate}
-                minDate={new Date("01-01-2020")}
-                onChange={(newValue) => {
-                  setValueDate(newValue)
-                }}
-                renderInput={(params) => (
-                  <TextField variant="standard" {...params} />
-                )}
-              />
-              <Label>Time</Label>
-              <TimePicker
-                value={valueTime}
-                onChange={setValueTime}
-                renderInput={(params) => (
-                  <TextField variant="standard" {...params} />
-                )}
-              />
               <Label>DateTime</Label>
               <DateTime
                 renderInput={(props) => (
                   <TextField variant="standard" {...props} />
                 )}
-                value={value}
+                value={valueDate}
                 onChange={(newValue) => {
-                  setValue(newValue)
+                  setValueDate(newValue)
                 }}
               />
             </LocalizationProvider>

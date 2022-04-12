@@ -1,7 +1,8 @@
 import styled from "styled-components"
 import { styled as MuiStyled } from "@mui/material/styles"
 import DateTimePicker from "@mui/lab/DateTimePicker"
-
+import Autocomplete from "@mui/material/Autocomplete"
+import TextField from "@mui/material/TextField"
 export const Container = styled.div`
   border: 1px solid #009fc7;
   margin: 10px;
@@ -106,4 +107,24 @@ background-color:black;
   border-left: none;
   border-bottom: 1px solid #009fc7;
 } 
+`
+export const Categories = styled(Autocomplete)`
+  border-bottom: 1px solid #009fc7;
+  text-decoration: none;
+  outline: none;
+  :focus {
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid #009fc7;
+  }
+  ::placeholder {
+    color: #009fc7;
+  }
+`
+export const TextField2 = styled(TextField)`
+  outline: none;
+  ::placeholder {
+    color: #009fc7;
+  }
 `
