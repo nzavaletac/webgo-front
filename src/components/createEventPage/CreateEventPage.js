@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import {
   Button,
   Column,
@@ -15,6 +15,9 @@ import {
   DateTime,
   Categories,
   TextField2,
+  LabelImg,
+  InputImg,
+  Img,
 } from "./CreateEventPageElements"
 import HelperCategories from "../../helpers/HelperCategories.js"
 import AdapterDateFns from "@mui/lab/AdapterDateFns"
@@ -28,13 +31,16 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
 
 const CreateEventPage = () => {
-  const [valueDate, setValueDate] = React.useState(new Date())
   mapboxgl.workerClass = MapboxWorker
   mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN
+  const [valueDate, setValueDate] = useState(new Date())
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const [valueCat, setValueCat] = React.useState(HelperCategories())
-  const [valueLngLat, setValueLngLat] = React.useState([
+  const [valueCat, setValueCat] = useState(HelperCategories())
+  const [file, setFile] = useState(null)
+  const [preview, setPreview] = useState(null)
+  const [arrEventCat, setArrEventCat] = useState([valueCat[0].id])
+  const [valueLngLat, setValueLngLat] = useState([
     -77.03996453142095, -12.059900202814433,
   ])
 
@@ -78,8 +84,16 @@ const CreateEventPage = () => {
       } else {
         marker.setLngLat(valueLngLat)
       }
+      console.log(valueLngLat)
     })
   })
+
+  function handleImg(file) {
+    const fileRider = new FileReader()
+    fileRider.addEventListener("load", (e) => setPreview(e.target.result))
+    fileRider.readAsDataURL(file)
+    console.log(preview)
+  }
 
   return (
     <Container>
@@ -94,7 +108,16 @@ const CreateEventPage = () => {
               multiple
               limitTags={2}
               options={valueCat}
+              defaultValue={[valueCat[0]]}
               getOptionLabel={(option) => option.title}
+              onChange={(event, newValues) => {
+                //setArrEventCat(newValue)
+                const arrAux = []
+                newValues.map((newValue) => {
+                  arrAux.push(newValue.id)
+                })
+                setArrEventCat(arrAux)
+              }}
               renderInput={(params) => (
                 <TextField2
                   {...params}
@@ -103,6 +126,7 @@ const CreateEventPage = () => {
                 />
               )}
             />
+            {console.log(arrEventCat)}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Label>DateTime</Label>
               <DateTime
@@ -122,14 +146,29 @@ const CreateEventPage = () => {
               type="text"
               placeholder="Enter the group link in whatsapp "
             />
-            <Button>Create Event</Button>
+            <Button type="submit">Create Event</Button>
           </Column>
           <Column>
             <SubTitle>Select your location</SubTitle>
             <DivMap ref={mapContainer}></DivMap>
             <SubTitle>Upload Image</SubTitle>
             {/*Aqui estara el elemento para cargar imagenes*/}
-            <Upload></Upload>
+            <Upload>
+              <LabelImg htmlFor="input-img">
+                {preview ? "Change" : "Select image"}
+              </LabelImg>
+              <InputImg
+                name="input-img"
+                type="file"
+                id="input-img"
+                accept="image/*"
+                onChange={(e) => {
+                  setFile(e.target.files[0])
+                  handleImg(e.target.files[0])
+                }}
+              ></InputImg>
+              {preview && <Img src={preview} alt="preview" />}
+            </Upload>
           </Column>
         </Form>
       </ContainerForm>
