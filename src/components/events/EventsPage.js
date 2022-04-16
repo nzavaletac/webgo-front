@@ -12,16 +12,45 @@ import {
   OptionSelect,
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
-import HelperEvents from "../../helpers/HelperEvents"
 import HelperSortEvents from "../../helpers/HelperSortEvents.js"
+import { getListAll } from "../../services/Event.services"
 
 class Events extends React.Component {
   constructor() {
     super()
     this.state = {
       selectedId: 0,
-      arrEvents: HelperEvents(),
+      //arrEvents: HelperEvents(),
+      arrEvents: [
+        /*{
+          categories: [{}, {}],
+          date: new Date(),
+          description: "Concierto aniversario Agua Marina",
+          src: "https://cdn.joinnus.com/files/2022/01/drquhEGIghYW6LQ.jpg",
+          title: "Concierto Agua Marina",
+          _id: "6232de2ce4c2c2cbd4b722e3",
+        },*/
+      ],
     }
+  }
+
+  componentDidMount() {
+    let Carousel_1 = "https://cdn.joinnus.com/files/2022/01/drquhEGIghYW6LQ.jpg"
+    const arrCategories = [
+      { title: "concert", _id: 1 },
+      { title: "marathon", _id: 2 },
+      { title: "sport", _id: 3 },
+    ]
+    getListAll().then((data) => {
+      console.log("Data")
+      console.log(data)
+      data.map((dato) => {
+        dato.date = new Date(dato.date)
+        dato.src = Carousel_1
+        dato.categories = arrCategories
+      })
+      this.setState({ arrEvents: data })
+    })
   }
 
   dropdownChanged(e) {
@@ -61,13 +90,13 @@ class Events extends React.Component {
             </Select>
           </DivButtons>
           <DivEvents>
-            {this.state.arrEvents.map((event) => {
+            {this.state.arrEvents?.map((event) => {
               return (
                 <CardEvent
                   src={event.src}
                   alt={event.title}
-                  id={event.id}
-                  key={event.id}
+                  id={event._id}
+                  key={event._id}
                   title={event.title}
                   date={event.date}
                   categories={event.categories}
