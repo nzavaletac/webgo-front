@@ -34,7 +34,7 @@ function CardEvent(props) {
             <Tag
               size="small"
               color="info"
-              key={category.id}
+              key={category._id}
               label={category.title}
             ></Tag>
           )
