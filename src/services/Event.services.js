@@ -20,7 +20,7 @@ export const postCreate = async (objEvent) => {
       },
     }
   )
-  return result.data.events
+  return result.data.event
 }
 export const getMyList = async (objEvent, userId) => {
   const result = await axios.get(

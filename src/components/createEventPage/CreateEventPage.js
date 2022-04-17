@@ -29,6 +29,18 @@ import mapboxgl from "mapbox-gl/dist/mapbox-gl.js"
 import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker"
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
+import { postCreate } from "../../services/Event.services"
+import Swal from "sweetalert2"
+
+const emptyForm = {
+  title: "",
+  location: [],
+  image: "",
+  date: new Date(),
+  description: "",
+  userId: "",
+  categories: [],
+}
 
 const CreateEventPage = () => {
   mapboxgl.workerClass = MapboxWorker
@@ -43,6 +55,7 @@ const CreateEventPage = () => {
   const [valueLngLat, setValueLngLat] = useState([
     -77.03996453142095, -12.059900202814433,
   ])
+  const [form, setForm] = useState(emptyForm)
 
   useEffect(() => {
     var marker
@@ -92,21 +105,64 @@ const CreateEventPage = () => {
     const fileRider = new FileReader()
     fileRider.addEventListener("load", (e) => setPreview(e.target.result))
     fileRider.readAsDataURL(file)
-    console.log(preview)
+  }
+
+  function handleChange(e) {
+    const valor = e.target.value
+    setForm({
+      ...form,
+      [e.target.name]: valor,
+    })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    form.categories = arrEventCat
+    form.image = preview
+    form.date = valueDate
+    form.userId = "6232df4de4c2c2cbd4b722e6"
+    form.location = valueLngLat
+    console.log(form)
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        postCreate(form).then((data) => {
+          if (data._id) {
+            setForm(emptyForm)
+            Swal.fire({
+              title: "Successful",
+              text: "Event created successfully",
+              icon: "success",
+              timer: 1500,
+            })
+            window.location.href = "/events"
+          }
+        })
+      }
+    })
   }
 
   return (
     <Container>
       <Title>New Event</Title>
       <ContainerForm>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Column>
             <Label>Title</Label>
-            <Input type="text" placeholder="Enter events's title " />
+            <Input
+              type="text"
+              placeholder="Enter events's title "
+              name="title"
+              onChange={handleChange}
+            />
             <Label>Category</Label>
             <Categories
               multiple
-              limitTags={2}
+              limitTags={1}
               options={valueCat}
               defaultValue={[valueCat[0]]}
               getOptionLabel={(option) => option.title}
@@ -126,7 +182,6 @@ const CreateEventPage = () => {
                 />
               )}
             />
-            {console.log(arrEventCat)}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Label>DateTime</Label>
               <DateTime
@@ -140,11 +195,11 @@ const CreateEventPage = () => {
               />
             </LocalizationProvider>
             <Label>Description</Label>
-            <TextArea type="text" placeholder="Enter event's description" />
-            <Label>Whatsapp</Label>
-            <Input
+            <TextArea
               type="text"
-              placeholder="Enter the group link in whatsapp "
+              placeholder="Enter event's description"
+              name="description"
+              onChange={handleChange}
             />
             <Button type="submit">Create Event</Button>
           </Column>
