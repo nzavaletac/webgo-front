@@ -7,7 +7,7 @@ export const getListAll = async () => {
       "Content-type": "application/json",
     },
   })
-  return result.data.events
+  return result.data
 }
 //pass userId in form from CreateEventPage
 export const postCreate = async (objEvent) => {
@@ -20,7 +20,7 @@ export const postCreate = async (objEvent) => {
       },
     }
   )
-  return result.data.event
+  return result.data
 }
 export const getMyList = async (objEvent, userId) => {
   const result = await axios.get(
