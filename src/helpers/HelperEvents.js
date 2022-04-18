@@ -8,10 +8,7 @@ export default function HelperEvents() {
   ]
   var arrEvents
   getListAll().then((data) => {
-    console.log("Data Enviada")
-    console.log(data)
-
-    data.map((dato) => {
+    data.events.map((dato) => {
       dato.date = new Date(dato.date)
       dato.src = Carousel_1
       dato.categories = arrCategories
