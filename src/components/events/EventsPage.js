@@ -14,42 +14,31 @@ import {
 import CardEvent from "./components/cardEvent/CardEvent.js"
 import HelperSortEvents from "../../helpers/HelperSortEvents.js"
 import { getListAll } from "../../services/Event.services"
+import Swal from "sweetalert2"
 
 class Events extends React.Component {
   constructor() {
     super()
     this.state = {
       selectedId: 0,
-      //arrEvents: HelperEvents(),
-      arrEvents: [
-        /*{
-          categories: [{}, {}],
-          date: new Date(),
-          description: "Concierto aniversario Agua Marina",
-          src: "https://cdn.joinnus.com/files/2022/01/drquhEGIghYW6LQ.jpg",
-          title: "Concierto Agua Marina",
-          _id: "6232de2ce4c2c2cbd4b722e3",
-        },*/
-      ],
+      arrEvents: [],
     }
   }
 
   componentDidMount() {
-    let Carousel_1 = "https://cdn.joinnus.com/files/2022/01/drquhEGIghYW6LQ.jpg"
-    const arrCategories = [
-      { title: "concert", _id: 1 },
-      { title: "marathon", _id: 2 },
-      { title: "sport", _id: 3 },
-    ]
     getListAll().then((data) => {
-      console.log("Data")
-      console.log(data)
-      data.map((dato) => {
-        dato.date = new Date(dato.date)
-        dato.src = Carousel_1
-        dato.categories = arrCategories
-      })
-      this.setState({ arrEvents: data })
+      if (data.events) {
+        this.setState({ arrEvents: data.events })
+      } else {
+        if (data.error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            timer: 1500,
+          })
+        }
+      }
     })
   }
 
@@ -93,7 +82,7 @@ class Events extends React.Component {
             {this.state.arrEvents?.map((event) => {
               return (
                 <CardEvent
-                  src={event.src}
+                  src={event.image}
                   alt={event.title}
                   id={event._id}
                   key={event._id}
