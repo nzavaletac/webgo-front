@@ -83,7 +83,7 @@ const CreateEventPage = () => {
           enableHighAccuracy: true,
         },
         trackUserLocation: true,
-        //showUserLocation:false,
+        showUserLocation: false,
       })
     )
 
@@ -131,7 +131,7 @@ const CreateEventPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         postCreate(form).then((data) => {
-          if (data._id) {
+          if (data.event._id) {
             setForm(emptyForm)
             Swal.fire({
               title: "Successful",
@@ -140,6 +140,15 @@ const CreateEventPage = () => {
               timer: 1500,
             })
             window.location.href = "/events"
+          } else {
+            if (data.error) {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                timer: 1500,
+              })
+            }
           }
         })
       }
@@ -167,7 +176,6 @@ const CreateEventPage = () => {
               defaultValue={[valueCat[0]]}
               getOptionLabel={(option) => option.title}
               onChange={(event, newValues) => {
-                //setArrEventCat(newValue)
                 const arrAux = []
                 newValues.map((newValue) => {
                   arrAux.push(newValue.id)
@@ -207,7 +215,6 @@ const CreateEventPage = () => {
             <SubTitle>Select your location</SubTitle>
             <DivMap ref={mapContainer}></DivMap>
             <SubTitle>Upload Image</SubTitle>
-            {/*Aqui estara el elemento para cargar imagenes*/}
             <Upload>
               <LabelImg htmlFor="input-img">
                 {preview ? "Change" : "Select image"}
