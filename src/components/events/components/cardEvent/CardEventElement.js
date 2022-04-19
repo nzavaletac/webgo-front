@@ -54,7 +54,7 @@ export const Description = styled.p`
   height: 48px;
   width: 240px;
 `
-export const Date = styled.p`
+export const DateLabel = styled.p`
   position: static;
   font-family: Roboto;
   font-style: normal;
