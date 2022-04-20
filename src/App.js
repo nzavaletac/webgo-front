@@ -23,8 +23,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Default />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/home" element={<Home />} /> */}
-
         <Route path="/register" element={<Register />} />
         <Route path="/create" element={<Create />} />
         <Route
@@ -32,6 +30,14 @@ function App() {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/events"
+          element={
+            <PrivateRoute>
+              <Events />
             </PrivateRoute>
           }
         />
