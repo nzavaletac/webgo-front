@@ -32,7 +32,7 @@ const RegisterPage = () => {
   const [form, setForm] = useState(emptyForm)
   mapboxgl.workerClass = MapboxWorker
   mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN
-  const mapContainer = useRef(null)
+  const mapDiv = useRef(null)
   const map = useRef(null)
   const [valueLngLat, setValueLngLat] = useState([
     -77.03996453142095, -12.059900202814433,
@@ -75,7 +75,7 @@ const RegisterPage = () => {
     var marker
     if (map.current) return // initialize map only once
     map.current = new mapboxgl.Map({
-      container: mapContainer.current,
+      container: mapDiv.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-77.03996453142095, -12.059900202814433],
       zoom: 14,
@@ -166,7 +166,7 @@ const RegisterPage = () => {
       </Column>
       <Column>
         <Title>Select your location</Title>
-        <Map ref={mapContainer}></Map>
+        <Map ref={mapDiv}></Map>
       </Column>
     </Container>
   )
