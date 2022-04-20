@@ -31,6 +31,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
 import { postCreate } from "../../services/Event.services"
 import Swal from "sweetalert2"
+import { getCategories } from "../../services/Category.services"
 
 const emptyForm = {
   title: "",
@@ -48,7 +49,7 @@ const CreateEventPage = () => {
   const [valueDate, setValueDate] = useState(new Date())
   const mapContainer = useRef(null)
   const map = useRef(null)
-  const [valueCat, setValueCat] = useState(HelperCategories())
+  const [valueCat, setValueCat] = useState([{ title: "undifine", _id: "0" }])
   const [file, setFile] = useState(null)
   const [preview, setPreview] = useState(null)
   const [arrEventCat, setArrEventCat] = useState([valueCat[0].id])
@@ -56,7 +57,11 @@ const CreateEventPage = () => {
     -77.03996453142095, -12.059900202814433,
   ])
   const [form, setForm] = useState(emptyForm)
-
+  if (valueCat[0]._id == "0") {
+    getCategories().then((data) => {
+      setValueCat(data.categories)
+    })
+  }
   useEffect(() => {
     var marker
     if (map.current) return // initialize map only once
@@ -169,27 +174,31 @@ const CreateEventPage = () => {
               onChange={handleChange}
             />
             <Label>Category</Label>
-            <Categories
-              multiple
-              limitTags={1}
-              options={valueCat}
-              defaultValue={[valueCat[0]]}
-              getOptionLabel={(option) => option.title}
-              onChange={(event, newValues) => {
-                const arrAux = []
-                newValues.map((newValue) => {
-                  arrAux.push(newValue.id)
-                })
-                setArrEventCat(arrAux)
-              }}
-              renderInput={(params) => (
-                <TextField2
-                  {...params}
-                  variant="standard"
-                  placeholder="Categories"
-                />
-              )}
-            />
+            {valueCat[0]._id !== "0" && (
+              <Categories
+                multiple
+                limitTags={1}
+                options={valueCat}
+                isOptionEqualToValue={(option, value) =>
+                  option._id === value._id
+                }
+                getOptionLabel={(option) => option.title}
+                onChange={(event, newValues) => {
+                  const arrAux = []
+                  newValues.map((newValue) => {
+                    arrAux.push(newValue._id)
+                  })
+                  setArrEventCat(arrAux)
+                }}
+                renderInput={(params) => (
+                  <TextField2
+                    {...params}
+                    variant="standard"
+                    placeholder="Categories"
+                  />
+                )}
+              />
+            )}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Label>DateTime</Label>
               <DateTime
