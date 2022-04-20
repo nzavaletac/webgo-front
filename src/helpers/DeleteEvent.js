@@ -17,10 +17,10 @@ export default function DeleteEvent(id) {
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
-          timer: 1500,
+          timer: 3500,
         })
       }
     }
   })
-  return console.log("Eliminando evento: " + id)
+  return null
 }

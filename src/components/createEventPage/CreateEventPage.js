@@ -102,7 +102,6 @@ const CreateEventPage = () => {
       } else {
         marker.setLngLat(valueLngLat)
       }
-      console.log(valueLngLat)
     })
   })
 
@@ -127,7 +126,6 @@ const CreateEventPage = () => {
     form.date = valueDate
     form.userId = "6232df4de4c2c2cbd4b722e6"
     form.location = valueLngLat
-    console.log(form)
     Swal.fire({
       title: "Are you sure?",
       icon: "question",
@@ -142,7 +140,7 @@ const CreateEventPage = () => {
               title: "Successful",
               text: "Event created successfully",
               icon: "success",
-              timer: 1500,
+              timer: 3500,
             })
             window.location.href = "/events"
           } else {
@@ -151,7 +149,7 @@ const CreateEventPage = () => {
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                timer: 1500,
+                timer: 3500,
               })
             }
           }
