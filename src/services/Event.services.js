@@ -51,3 +51,16 @@ export const getShowEvent = async (objEvent, eventId) => {
   )
   return result.data
 }
+//export const deleteEvent = async (objEvent, eventId) => {
+export const deleteEvent = async (eventId) => {
+  const result = await axios.delete(
+    `${URL_BACKEND}/events/${eventId}`,
+    //JSON.stringify(objEvent),
+    {
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  )
+  return result.data
+}
