@@ -10,7 +10,6 @@ import {
   Map,
   Title,
 } from "./RegisterPageElements"
-import MapImg from "../../assets/images/maps2.jpeg"
 import Swal from "sweetalert2"
 import { postUsers } from "../../services/User.services"
 import "mapbox-gl/dist/mapbox-gl.css"
