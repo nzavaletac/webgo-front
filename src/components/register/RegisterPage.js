@@ -10,6 +10,7 @@ import {
   Map,
   Title,
 } from "./RegisterPageElements";
+import { Link } from "react-router-dom";
 import MapImg from "../../assets/images/maps2.jpeg";
 import Swal from "sweetalert2";
 import { postUsers } from "../../services/User.services";
@@ -44,7 +45,7 @@ const RegisterPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         postUsers(form).then((data) => {
-          if (!data._id) {
+          if (data.user._id) {
             setForm(emptyForm);
             Swal.fire({
               title: "Successful",
@@ -113,6 +114,9 @@ const RegisterPage = () => {
               value={form.password}
             />
             <Button type="submit">Create an Account</Button>
+            <Label>
+              Already have an account? <Link to="/login"> Sign in</Link>
+            </Label>
           </Form>
         </ContainerForm>
       </Column>

@@ -23,10 +23,10 @@ const NavBarHome = () => {
         </HeaderMenuProfile>
         <ul>
           <li>
-            <Link to="/login">Account</Link>
+            <Link to="/">Events</Link>
           </li>
           <li>
-            <Link to="/">Log In</Link>
+            <Link to="/">Log out</Link>
           </li>
         </ul>
       </HeaderMenu>
