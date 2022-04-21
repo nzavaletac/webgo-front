@@ -1,6 +1,10 @@
 import axios from "axios";
 import { URL_BACKEND } from "../environments/environments";
 
+export const sigIn=async(objUser)=>{
+  
+}
+
 export const postUsers = async (objUser) => {
   const result = await axios.post(
     `${URL_BACKEND}/users/signup`,

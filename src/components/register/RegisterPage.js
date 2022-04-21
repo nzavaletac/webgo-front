@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Button,
   Column,
@@ -10,21 +10,34 @@ import {
   Map,
   Title,
 } from "./RegisterPageElements";
-import MapImg from "../../assets/images/maps2.jpeg";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { postUsers } from "../../services/User.services";
+import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 const emptyForm = {
   name: "",
   lastName: "",
   phoneNumber: "",
-  city: "",
+  location: [],
   email: "",
   password: "",
 };
 
 const RegisterPage = () => {
   const [form, setForm] = useState(emptyForm);
+  mapboxgl.workerClass = MapboxWorker;
+  mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN;
+  const mapDiv = useRef(null);
+  const map = useRef(null);
+  const [valueLngLat, setValueLngLat] = useState([
+    -77.03996453142095, -12.059900202814433,
+  ]);
 
   const handleChange = (e) => {
     const valor = e.target.value;
@@ -36,6 +49,7 @@ const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    form.location = valueLngLat;
     Swal.fire({
       title: "Are you sure?",
       icon: "question",
@@ -44,7 +58,7 @@ const RegisterPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         postUsers(form).then((data) => {
-          if (!data._id) {
+          if (data.token) {
             setForm(emptyForm);
             Swal.fire({
               title: "Successful",
@@ -57,6 +71,51 @@ const RegisterPage = () => {
       }
     });
   };
+
+  useEffect(() => {
+    var marker;
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapDiv.current,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [-77.03996453142095, -12.059900202814433],
+      zoom: 14,
+    });
+
+    map.current.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        zoom: 14,
+        marker: false,
+      })
+    );
+    map.current.addControl(new mapboxgl.NavigationControl());
+    map.current.addControl(new mapboxgl.FullscreenControl());
+    map.current.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+        showUserLocation: false,
+      })
+    );
+
+    map.current.on("click", function (e) {
+      setValueLngLat([
+        (valueLngLat[0] = Object.values(e.lngLat)[0]),
+        (valueLngLat[1] = Object.values(e.lngLat)[1]),
+      ]);
+      if (marker == null) {
+        marker = new mapboxgl.Marker()
+          .setLngLat(valueLngLat)
+          .addTo(map.current);
+      } else {
+        marker.setLngLat(valueLngLat);
+      }
+    });
+  });
 
   return (
     <Container>
@@ -88,14 +147,6 @@ const RegisterPage = () => {
               onChange={handleChange}
               value={form.phoneNumber}
             />
-            <Label>City</Label>
-            <Input
-              type="text"
-              placeholder="Enter your city"
-              name="city"
-              onChange={handleChange}
-              value={form.city}
-            />
             <Label>Email</Label>
             <Input
               type="email"
@@ -113,12 +164,15 @@ const RegisterPage = () => {
               value={form.password}
             />
             <Button type="submit">Create an Account</Button>
+            <Label>
+              Already have an account? <Link to="/login"> Sign in</Link>
+            </Label>
           </Form>
         </ContainerForm>
       </Column>
       <Column>
         <Title>Select your location</Title>
-        <Map src={MapImg} />
+        <Map ref={mapDiv}></Map>
       </Column>
     </Container>
   );
