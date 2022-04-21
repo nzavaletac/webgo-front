@@ -63,8 +63,8 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   width: 100%;
-  height: 100%;
-  padding: 15px;
+  height: 42px;
+  padding: 10px;
   background: #009fc7;
   color: #fff;
   border: none;

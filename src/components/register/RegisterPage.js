@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react";
 import {
   Button,
   Column,
@@ -9,15 +9,16 @@ import {
   Label,
   Map,
   Title,
-} from "./RegisterPageElements"
-import Swal from "sweetalert2"
-import { postUsers } from "../../services/User.services"
-import "mapbox-gl/dist/mapbox-gl.css"
-import mapboxgl from "mapbox-gl/dist/mapbox-gl.js"
+} from "./RegisterPageElements";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { postUsers } from "../../services/User.services";
+import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker"
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
-import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
+import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 const emptyForm = {
   name: "",
@@ -26,29 +27,29 @@ const emptyForm = {
   location: [],
   email: "",
   password: "",
-}
+};
 
 const RegisterPage = () => {
-  const [form, setForm] = useState(emptyForm)
-  mapboxgl.workerClass = MapboxWorker
-  mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN
-  const mapDiv = useRef(null)
-  const map = useRef(null)
+  const [form, setForm] = useState(emptyForm);
+  mapboxgl.workerClass = MapboxWorker;
+  mapboxgl.accessToken = process.env.REACT_APP_MAP_TOKEN;
+  const mapDiv = useRef(null);
+  const map = useRef(null);
   const [valueLngLat, setValueLngLat] = useState([
     -77.03996453142095, -12.059900202814433,
-  ])
+  ]);
 
   const handleChange = (e) => {
-    const valor = e.target.value
+    const valor = e.target.value;
     setForm({
       ...form,
       [e.target.name]: valor,
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    form.location = valueLngLat
+    e.preventDefault();
+    form.location = valueLngLat;
     Swal.fire({
       title: "Are you sure?",
       icon: "question",
@@ -57,29 +58,29 @@ const RegisterPage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         postUsers(form).then((data) => {
-          if (!data._id) {
-            setForm(emptyForm)
+          if (data.token) {
+            setForm(emptyForm);
             Swal.fire({
               title: "Successful",
               text: "Account registered successfully",
               icon: "success",
               timer: 1500,
-            })
+            });
           }
-        })
+        });
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    var marker
-    if (map.current) return // initialize map only once
+    var marker;
+    if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapDiv.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-77.03996453142095, -12.059900202814433],
       zoom: 14,
-    })
+    });
 
     map.current.addControl(
       new MapboxGeocoder({
@@ -88,9 +89,9 @@ const RegisterPage = () => {
         zoom: 14,
         marker: false,
       })
-    )
-    map.current.addControl(new mapboxgl.NavigationControl())
-    map.current.addControl(new mapboxgl.FullscreenControl())
+    );
+    map.current.addControl(new mapboxgl.NavigationControl());
+    map.current.addControl(new mapboxgl.FullscreenControl());
     map.current.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -99,20 +100,22 @@ const RegisterPage = () => {
         trackUserLocation: true,
         showUserLocation: false,
       })
-    )
+    );
 
     map.current.on("click", function (e) {
       setValueLngLat([
         (valueLngLat[0] = Object.values(e.lngLat)[0]),
         (valueLngLat[1] = Object.values(e.lngLat)[1]),
-      ])
+      ]);
       if (marker == null) {
-        marker = new mapboxgl.Marker().setLngLat(valueLngLat).addTo(map.current)
+        marker = new mapboxgl.Marker()
+          .setLngLat(valueLngLat)
+          .addTo(map.current);
       } else {
-        marker.setLngLat(valueLngLat)
+        marker.setLngLat(valueLngLat);
       }
-    })
-  })
+    });
+  });
 
   return (
     <Container>
@@ -161,6 +164,9 @@ const RegisterPage = () => {
               value={form.password}
             />
             <Button type="submit">Create an Account</Button>
+            <Label>
+              Already have an account? <Link to="/login"> Sign in</Link>
+            </Label>
           </Form>
         </ContainerForm>
       </Column>
@@ -169,7 +175,7 @@ const RegisterPage = () => {
         <Map ref={mapDiv}></Map>
       </Column>
     </Container>
-  )
-}
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

@@ -9,7 +9,7 @@ const NavBarDefault = () => {
       <Link to="/">
         <Logo src={logo} />
       </Link>
-      <Button to="/signin">Sign In</Button>
+      <Button to="/login">Sign In</Button>
     </Header>
   );
 };
