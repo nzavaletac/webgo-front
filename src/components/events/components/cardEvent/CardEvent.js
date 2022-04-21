@@ -9,6 +9,7 @@ import {
   DateLabel,
   Tags,
   Tag,
+  Label,
 } from "./CardEventElement"
 import EditEvent from "../../../../helpers/EditEvent.js"
 import DeleteEvent from "../../../../helpers/DeleteEvent.js"
@@ -24,10 +25,9 @@ function CardEvent(props) {
       <Edit onClick={() => EditEvent(props.id)}></Edit>
       <Title>{props.title}</Title>
       <ImgEvent src={props.src} alt={props.alt} />
-      <Description>
-        When you add work to your Slate calendar we automatically calculate
-        useful insights about the financial health
-      </Description>
+      <Label>Description:</Label>
+      <Description>{props.description}</Description>
+      <Label>Date:</Label>
       <DateLabel>{newDate.toLocaleDateString()}</DateLabel>
       <Tags>
         {props.categories.map((category) => {

@@ -49,10 +49,11 @@ export const Description = styled.p`
   line-height: 18px;
   letter-spacing: 0.1px;
   margin: 0 5.05%;
-  margin-bottom: 5px;
+
   color: #000000;
-  height: 48px;
+  height: 20px;
   width: 240px;
+  text-align: center;
 `
 export const DateLabel = styled.p`
   position: static;
@@ -63,8 +64,9 @@ export const DateLabel = styled.p`
   line-height: 18px;
   letter-spacing: 0.1px;
   margin: 0 5.05%;
-  margin-bottom: 5px;
+
   color: #000000;
+  text-align: center;
 `
 export const Title = styled.h5`
   font-family: Roboto;
@@ -78,7 +80,7 @@ export const Title = styled.h5`
   text-align: center;
 `
 export const Tags = styled.div`
-  height: 45px;
+  height: 38px;
   width: 240px;
   display: flex;
   justify-content: center;
@@ -87,4 +89,10 @@ export const Tags = styled.div`
 `
 export const Tag = styled(Chip)`
   margin: 0 2px;
+`
+export const Label = styled.label`
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 15px;
 `

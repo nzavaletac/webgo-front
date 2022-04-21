@@ -89,6 +89,7 @@ class Events extends React.Component {
                   title={event.title}
                   date={event.date}
                   categories={event.categories}
+                  description={event.description}
                 ></CardEvent>
               )
             })}
