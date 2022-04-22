@@ -1,15 +1,15 @@
-import React from "react";
-import "../navbar/NavBarHomeStyles.css";
+import React from "react"
+import "../navbar/NavBarHomeStyles.css"
 import {
   Header,
   HeaderMenu,
   HeaderMenuProfile,
   HeaderMenuProfileImg,
   Logo,
-} from "./NavBarHomeElements";
-import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
-import profileImg from "../../assets/images/user-icon.svg";
+} from "./NavBarHomeElements"
+import { Link } from "react-router-dom"
+import logo from "../../assets/images/logo.png"
+import profileImg from "../../assets/images/user-icon.svg"
 
 const NavBarHome = () => {
   return (
@@ -23,7 +23,7 @@ const NavBarHome = () => {
         </HeaderMenuProfile>
         <ul>
           <li>
-            <Link to="/">Events</Link>
+            <Link to="/events">Events</Link>
           </li>
           <li>
             <Link to="/">Log out</Link>
@@ -31,7 +31,7 @@ const NavBarHome = () => {
         </ul>
       </HeaderMenu>
     </Header>
-  );
-};
+  )
+}
 
-export default NavBarHome;
+export default NavBarHome

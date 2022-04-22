@@ -10,18 +10,40 @@ import {
   CreateAdd,
   Select,
   OptionSelect,
+  Loading
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
-import HelperEvents from "../../helpers/HelperEvents"
 import HelperSortEvents from "../../helpers/HelperSortEvents.js"
+import { getListAll } from "../../services/Event.services"
+import Swal from "sweetalert2"
 
 class Events extends React.Component {
   constructor() {
     super()
     this.state = {
       selectedId: 0,
-      arrEvents: HelperEvents(),
+      arrEvents: [],
+      loading:true,
     }
+  }
+
+  componentDidMount() {
+    getListAll().then((data) => {
+      if (data.events) {
+        this.setState({ arrEvents: data.events })
+      } else {
+        if (data.error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            timer: 1500,
+          })
+        }
+      }
+    }).finally(()=>{
+      this.setState({loading:false})
+    })
   }
 
   dropdownChanged(e) {
@@ -61,16 +83,18 @@ class Events extends React.Component {
             </Select>
           </DivButtons>
           <DivEvents>
-            {this.state.arrEvents.map((event) => {
+          {this.state.loading && <Loading></Loading>}
+            {this.state.arrEvents?.map((event) => {
               return (
                 <CardEvent
-                  src={event.src}
+                  src={event.image}
                   alt={event.title}
-                  id={event.id}
-                  key={event.id}
+                  id={event._id}
+                  key={event._id}
                   title={event.title}
                   date={event.date}
                   categories={event.categories}
+                  description={event.description}
                 ></CardEvent>
               )
             })}

@@ -1,9 +1,8 @@
+import { getCategories } from "../../src/services/Category.services"
 export default function HelperCategories() {
-  const arrCategories = [
-    { title: "concert", id: 1 },
-    { title: "marathon", id: 2 },
-    { title: "sport", id: 3 },
-    { title: "opening", id: 4 },
-  ]
-  return arrCategories
+  var arrCategories = []
+  getCategories().then((data) => {
+    arrCategories = data.categories
+    return arrCategories
+  })
 }
