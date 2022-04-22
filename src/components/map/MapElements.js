@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 80vh;
 `
 export const Loading = styled.div`
-  margin-top: 30px;
+  margin-top: 150px;
   width: 98vw;
   height: 80vh;
   border: 5px solid #f3f3f3;

@@ -26,7 +26,6 @@ const Map = () => {
       .finally(() => {
         if (loading && events.length !== 0) {
           events.map((event) => {
-            console.log(event)
             const dateEvent = new Date(event.date)
             const marker = new mapboxgl.Marker()
               .setLngLat(event.location)
