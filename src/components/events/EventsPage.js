@@ -10,6 +10,7 @@ import {
   CreateAdd,
   Select,
   OptionSelect,
+  Loading
 } from "./EventsPageElements"
 import CardEvent from "./components/cardEvent/CardEvent.js"
 import HelperSortEvents from "../../helpers/HelperSortEvents.js"
@@ -22,6 +23,7 @@ class Events extends React.Component {
     this.state = {
       selectedId: 0,
       arrEvents: [],
+      loading:true,
     }
   }
 
@@ -39,6 +41,8 @@ class Events extends React.Component {
           })
         }
       }
+    }).finally(()=>{
+      this.setState({loading:false})
     })
   }
 
@@ -79,6 +83,7 @@ class Events extends React.Component {
             </Select>
           </DivButtons>
           <DivEvents>
+          {this.state.loading && <Loading></Loading>}
             {this.state.arrEvents?.map((event) => {
               return (
                 <CardEvent
