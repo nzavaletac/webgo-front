@@ -22,7 +22,6 @@ export const Login = () => {
         password,
       },
     });
-    console.log(token);
     localStorage.setItem("token", token);
     localStorage.setItem("name", name);
     navigate("/home");

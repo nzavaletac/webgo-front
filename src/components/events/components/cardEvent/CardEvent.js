@@ -6,9 +6,10 @@ import {
   Description,
   Delete,
   ImgEvent,
-  Date,
+  DateLabel,
   Tags,
   Tag,
+  Label,
 } from "./CardEventElement"
 import EditEvent from "../../../../helpers/EditEvent.js"
 import DeleteEvent from "../../../../helpers/DeleteEvent.js"
@@ -18,23 +19,23 @@ import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap"
 function CardEvent(props) {
   const [modal, setModal] = React.useState(false)
   const toggle = () => setModal(!modal)
+  const newDate = new Date(props.date)
   return (
     <Card>
       <Edit onClick={() => EditEvent(props.id)}></Edit>
       <Title>{props.title}</Title>
       <ImgEvent src={props.src} alt={props.alt} />
-      <Description>
-        When you add work to your Slate calendar we automatically calculate
-        useful insights about the financial health
-      </Description>
-      <Date>{props.date.toLocaleDateString()}</Date>
+      <Label>Description:</Label>
+      <Description>{props.description}</Description>
+      <Label>Date:</Label>
+      <DateLabel>{newDate.toLocaleDateString()}</DateLabel>
       <Tags>
         {props.categories.map((category) => {
           return (
             <Tag
               size="small"
               color="info"
-              key={category.id}
+              key={category._id}
               label={category.title}
             ></Tag>
           )

@@ -68,7 +68,7 @@ export const Input = styled.input`
 `
 export const TextArea = styled.textarea`
   width: 100%;
-  height: 50px;
+  height: 100px;
 
   :focus {
     outline: none;
@@ -98,6 +98,10 @@ export const Upload = styled.div`
   width: 45vw;
   height: 35vh;
   border: 1px solid #009fc7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `
 export const DateTime = MuiStyled(DateTimePicker)`
 background-color:black;
@@ -127,4 +131,27 @@ export const TextField2 = styled(TextField)`
   ::placeholder {
     color: #009fc7;
   }
+`
+export const Img = styled.img`
+  width: 200px;
+  height: 200px; ;
+`
+export const LabelImg = styled.label`
+  color: #fff;
+  border-radius: 4px;
+  background-color: #009fc7;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  padding: 6px 16px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px,
+    rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+`
+export const InputImg = styled.input`
+  display: none;
 `
