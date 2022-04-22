@@ -124,7 +124,6 @@ const CreateEventPage = () => {
     form.categories = arrEventCat
     form.image = preview
     form.date = valueDate
-    form.userId = "6232df4de4c2c2cbd4b722e6"
     form.location = valueLngLat
     Swal.fire({
       title: "Are you sure?",
@@ -153,7 +152,12 @@ const CreateEventPage = () => {
               })
             }
           }
-        })
+        }).finally(Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          timer: 3500,
+        }))
       }
     })
   }
