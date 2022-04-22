@@ -1,37 +1,38 @@
-import React from "react"
+import React from "react";
 import {
   Container,
   DivButtons,
   Filter,
   DivEvents,
   Create,
+  Create1,
   TextCreate,
   DivCreate,
   CreateAdd,
   Select,
   OptionSelect,
-} from "./EventsPageElements"
-import CardEvent from "./components/cardEvent/CardEvent.js"
-import HelperEvents from "../../helpers/HelperEvents"
-import HelperSortEvents from "../../helpers/HelperSortEvents.js"
+} from "./EventsPageElements";
+import CardEvent from "./components/cardEvent/CardEvent.js";
+import HelperEvents from "../../helpers/HelperEvents";
+import HelperSortEvents from "../../helpers/HelperSortEvents.js";
 
 class Events extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       selectedId: 0,
       arrEvents: HelperEvents(),
-    }
+    };
   }
 
   dropdownChanged(e) {
     this.setState({
       selectedId: e.target.value,
       arrEvents: HelperSortEvents(e.target.value, this.state.arrEvents),
-    })
+    });
   }
   Clickbutton() {
-    console.log("Click")
+    console.log("Click");
   }
 
   render() {
@@ -60,6 +61,9 @@ class Events extends React.Component {
               </OptionSelect>
             </Select>
           </DivButtons>
+          <Create1 to="/home">
+            <TextCreate>Back go</TextCreate>
+          </Create1>
           <DivEvents>
             {this.state.arrEvents.map((event) => {
               return (
@@ -72,7 +76,7 @@ class Events extends React.Component {
                   date={event.date}
                   categories={event.categories}
                 ></CardEvent>
-              )
+              );
             })}
           </DivEvents>
           <DivCreate>
@@ -83,8 +87,8 @@ class Events extends React.Component {
           </DivCreate>
         </Container>
       </div>
-    )
+    );
   }
 }
 
-export default Events
+export default Events;

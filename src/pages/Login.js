@@ -11,8 +11,8 @@ export const Login = () => {
 
   async function login(e) {
     e.preventDefault();
-    const {
-      data: { token },
+    let {
+      data: { token, name },
     } = await axios({
       method: "POST",
       baseURL: URL_BACKEND,
@@ -22,8 +22,9 @@ export const Login = () => {
         password,
       },
     });
+    console.log(token);
     localStorage.setItem("token", token);
-    console.log(localStorage.getItem("token"));
+    localStorage.setItem("name", name);
     navigate("/home");
   }
 
