@@ -9,7 +9,7 @@ export const getListAll = async () => {
   })
   return result.data
 }
-//pass userId in form from CreateEventPage
+
 export const postCreate = async (objEvent) => {
   const result = await axios.post(
     `${URL_BACKEND}/events/`,
@@ -17,6 +17,7 @@ export const postCreate = async (objEvent) => {
     {
       headers: {
         "Content-type": "application/json",
+        "Authorization": 'Bearer '+localStorage.getItem("token"),
       },
     }
   )
@@ -29,6 +30,7 @@ export const getMyList = async (objEvent, userId) => {
     {
       headers: {
         "Content-type": "application/json",
+        "Authorization": 'Bearer '+localStorage.getItem("token"),
       },
       params: {
         userId: userId,
@@ -51,14 +53,14 @@ export const getShowEvent = async (objEvent, eventId) => {
   )
   return result.data
 }
-//export const deleteEvent = async (objEvent, eventId) => {
+
 export const deleteEvent = async (eventId) => {
   const result = await axios.delete(
     `${URL_BACKEND}/events/${eventId}`,
-    //JSON.stringify(objEvent),
     {
       headers: {
         "Content-type": "application/json",
+        "Authorization": 'Bearer '+localStorage.getItem("token"),
       },
     }
   )
