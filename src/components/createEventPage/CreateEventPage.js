@@ -152,12 +152,7 @@ const CreateEventPage = () => {
               })
             }
           }
-        }).finally(Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-          timer: 3500,
-        }))
+        })
       }
     })
   }
