@@ -31,5 +31,4 @@ export const HeaderMenuProfile = styled.div`
 export const HeaderMenuProfileImg = styled.img`
   margin-right: 30px;
   width: 50px;
-  margin-left: 30px;
 `;
